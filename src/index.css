@@ -14,3 +14,83 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+#header{
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-bottom: 1px gray solid;
+  min-height: 8vh;
+  max-height: 8vh;
+
+}
+#headtext{
+  flex:11;
+  padding: 10px;
+}
+#sidebarbutton{
+flex:1;
+flex-shrink: 1;
+padding-top: 10px;
+padding-bottom: 10px;
+justify-content: center;
+font-size: 40px;
+max-width: 100px;
+}
+#sidebarbutton:hover{
+  background-color: darkslategray;
+  color: white;
+}
+#subtext{
+  color: grey;
+}
+#mainpage{
+  display: flex;
+  min-height: 91.9vh;
+  max-height: 92vh;
+}
+#sidebar{
+
+  border-right: 2px gray solid;
+  display:flex;
+  flex-direction: column;
+
+  align-content: stretch;
+  align-items: stretch;
+  flex:3;
+  overflow-y:auto;
+}
+#sidebarTop{
+    display: flex;
+
+    flex-grow: 10;
+    max-height: 50px;
+    border-bottom: 1px gray solid;
+    font-weight: bold;
+}
+#addNoteButton{
+  justify-self: right;
+  text-align: center;
+  font-size: 1.5em;
+  flex:1;
+  padding: 10px;
+  padding-top: 15px;
+}
+#addNoteButton:hover{
+  background-color: darkslategray;
+  color: white;
+
+}
+#sideTitle{
+  padding: 10px;
+  flex:10;
+}
+#notelist{
+  flex-grow: 100;
+  
+}
+#note{
+  flex:10;
+}
+
