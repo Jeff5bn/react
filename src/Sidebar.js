@@ -1,5 +1,6 @@
 import {useState} from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 function mustsave(){
     const answer = window.confirm("You must save the current Note!");
 }
@@ -31,7 +32,9 @@ export default function sidebar({notes, addNote, sidebarvis, selectedNote, setSe
             </div>
             <div id="notelist">
             {Array.from(notes).map((note)=> (
+                <>
                 <div id="sidenote" className={`${(selectedNote===note.id) ? "selected" :""}`} onClick={() => setSelectedNote(note.id)}>
+                     
                 <h3 id="notetitle">{note.title}</h3>
                 <p id="datetimeside">{new Date(note.datetime).toLocaleString("en-US", 
                 {
@@ -43,6 +46,8 @@ export default function sidebar({notes, addNote, sidebarvis, selectedNote, setSe
                 })}</p>
                 <p id="notepreview">{convertbody(note.body.substring(0,100)+"...")}</p>
                 </div>
+                
+                </>
             ))}
 
             </div>
@@ -57,6 +62,7 @@ export default function sidebar({notes, addNote, sidebarvis, selectedNote, setSe
                 </div>
                 <div id="notelist">
                 {Array.from(notes).map((note)=> (
+                    
                     <div id="sidenote" className={`${(selectedNote===note.id) ? "selected" :""}`} onClick={() => mustsave()}>
                     <h3 id="notetitle">{note.title}</h3>
                     <p id="datetimeside">{new Date(note.datetime).toLocaleString("en-US", 

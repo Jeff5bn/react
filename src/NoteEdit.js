@@ -2,7 +2,7 @@ import { getValue } from "@testing-library/user-event/dist/utils";
 import ReactQuill from 'react-quill';
 import {useRef} from "react";
 import TextEditor from "./TextEditor";
-
+import { Link } from "react-router-dom";
 const options = {
     year: "numeric",
     month: "long",
@@ -47,8 +47,9 @@ export default function noteEdit({notes ,deleteNote, selectedNote, editNote ,tog
                     minute: "numeric",
                 })}</p>
                 </div>
+                <Link to={'/notes/1/edit'} id="savebutton">
                 <div id="savebutton" onClick={()=>editNote()}>Edit</div>
-                
+                </Link>
                 <div id="deletebutton" onClick={() => deleteNote(selectedNote.id)}>Delete</div>
             </div>
             <div id="notebody">
@@ -76,8 +77,9 @@ export default function noteEdit({notes ,deleteNote, selectedNote, editNote ,tog
                     <input id="notetitle"  type="text" defaultValue={selectedNote.title} onChange={newtitle}></input>
                     <input id="editdatetimeside" type="datetime-local"  defaultValue={now.toISOString().slice(0, -1)} onChange={newdate}/>
                 </div>
+                <Link to={'/notes/1'} id="savebutton">
                 <div id="savebutton" onClick={()=>editNote()}>Save</div>
-                
+                </Link>
                 <div id="deletebutton" onClick={() => deleteNote(selectedNote.id)}>Delete</div>
             </div>
             <div id="maintext">

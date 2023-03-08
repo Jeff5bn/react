@@ -6,6 +6,7 @@ import Content from "./Content";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactQuill from 'react-quill';
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 function App() {
   const [notes, setnotes] = useState(() => {
     const saved = localStorage.getItem("notes");
@@ -123,6 +124,7 @@ const formatDate = (when) => {
       
       setSelectedNote(newnote.id)
       setToggleEdit(true);
+      
     }
     
   }
@@ -169,9 +171,13 @@ const formatDate = (when) => {
     
     setSelectedNote(newnote.id)
   }
+  if(toggleEdit){
+    
+  }
   return (
     <BrowserRouter>
     <Routes>
+
       <Route  path="notes" element={<Content notes={notes} addNote={addNote} sidebarvis={sidebarvis} deleteNote={deleteNote} 
       selectedNote={selectedNote} setSelectedNote={setSelectedNote} getSelectedNote={getSelectedNote} editNote={editNote} 
       toggleEdit={toggleEdit} newdate={newdate} newtitle={newtitle} newbody={newbody} value={value} setValue={setValue} oldbody={oldbody} toggleSidebar={toggleSidebar}/>}></Route>
@@ -180,7 +186,7 @@ const formatDate = (when) => {
       selectedNote={selectedNote} setSelectedNote={setSelectedNote} getSelectedNote={getSelectedNote} editNote={editNote} 
       toggleEdit={toggleEdit} newdate={newdate} newtitle={newtitle} newbody={newbody} value={value} setValue={setValue} oldbody={oldbody} toggleSidebar={toggleSidebar} notenum={notenum}/>}></Route>
 
-      <Route  path="notes/:notenum/:togedit" element={<Content notes={notes} addNote={addNote} sidebarvis={sidebarvis} deleteNote={deleteNote} 
+      <Route  path="notes/:notenum/edit" element={<Content notes={notes} addNote={addNote} sidebarvis={sidebarvis} deleteNote={deleteNote} 
       selectedNote={selectedNote} setSelectedNote={setSelectedNote} getSelectedNote={getSelectedNote} editNote={editNote} 
       toggleEdit={toggleEdit} newdate={newdate} newtitle={newtitle} newbody={newbody} value={value} setValue={setValue} oldbody={oldbody} toggleSidebar={toggleSidebar}/>}></Route>
     </Routes>
