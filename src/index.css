@@ -178,3 +178,8 @@ max-width: 100px;
   border:0;
   width:fit-content;
 }
+
+#notebody{
+  padding: 10px;
+  overflow-y:auto;
+}

@@ -1,7 +1,8 @@
 import { getValue } from "@testing-library/user-event/dist/utils";
 import ReactQuill from 'react-quill';
-import {useState} from "react";
-
+import {useRef} from "react";
+import TextEditor from "./TextEditor";
+import { Editor } from "draft-js";
 const options = {
     year: "numeric",
     month: "long",
@@ -17,7 +18,10 @@ const formatDate = (when) => {
     }
     return formatted;
 };
-export default function noteEdit({notes ,deleteNote, selectedNote, editNote ,toggleEdit, newdate}){
+
+
+export default function noteEdit({notes ,deleteNote, selectedNote, editNote ,toggleEdit, newdate, newtitle ,newbody ,value, setValue, oldbody}){
+
     if(!toggleEdit){
     if(selectedNote===null){
         return (
@@ -47,6 +51,9 @@ export default function noteEdit({notes ,deleteNote, selectedNote, editNote ,tog
                 
                 <div id="deletebutton" onClick={() => deleteNote(selectedNote.id)}>Delete</div>
             </div>
+            <div id="notebody">
+            <td dangerouslySetInnerHTML={{__html: selectedNote.body}} />
+            </div>
         </div>
        
         </>
@@ -54,26 +61,28 @@ export default function noteEdit({notes ,deleteNote, selectedNote, editNote ,tog
         }
     }
     else{
+        var now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+      
+        /* remove second/millisecond if needed - credit ref. https://stackoverflow.com/questions/24468518/html5-input-datetime-local-default-value-of-today-and-current-time#comment112871765_60884408 */
+        now.setMilliseconds(null)
+        now.setSeconds(null)
+
+        
         return (<>
             <div id="note">
             <div id="noteheader">
                 <div id="leftside">
-                    <input id="notetitle" type="text" defaultValue={selectedNote.title}></input>
-                    <input id="editdatetimeside" type="datetime-local"  defaultValue={formatDate(selectedNote.datetime)} onChange={newdate(getValue())}/>
+                    <input id="notetitle"  type="text" defaultValue={selectedNote.title} onChange={newtitle}></input>
+                    <input id="editdatetimeside" type="datetime-local"  defaultValue={now.toISOString().slice(0, -1)} onChange={newdate}/>
                 </div>
                 <div id="savebutton" onClick={()=>editNote()}>Save</div>
                 
                 <div id="deletebutton" onClick={() => deleteNote(selectedNote.id)}>Delete</div>
             </div>
             <div id="maintext">
-            <ReactQuill
-            theme="snow"
-            style={{height:"500px"}}
-            modules={{
-                toolbar: ['bold', 'italic', 'underline', 'link', 'code-block', 'list']
-               }}
-
-            />
+            <TextEditor newbody={newbody} oldbody={oldbody}/>
+          
          </div>
         </div>
        
