@@ -2,7 +2,7 @@ import { getValue } from "@testing-library/user-event/dist/utils";
 import ReactQuill from 'react-quill';
 import {useRef} from "react";
 import TextEditor from "./TextEditor";
-import { Editor } from "draft-js";
+
 const options = {
     year: "numeric",
     month: "long",
