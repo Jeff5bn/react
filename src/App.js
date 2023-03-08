@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import Header from "./Header";
 import Content from "./Content";
@@ -6,13 +7,21 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactQuill from 'react-quill';
 import { useParams } from "react-router-dom";
 function App() {
-  const [notes, setnotes] = useState([]);
+  const [notes, setnotes] = useState(() => {
+    const saved = localStorage.getItem("notes");
+    const initialValue = JSON.parse(saved);
+    return initialValue || "";
+  });
   const [sidebarvis, setsidebarvis] = useState(true);
   const [selectedNote, setSelectedNote] = useState(false);
   const [toggleEdit, setToggleEdit] = useState(false);
   const [value, setValue] = useState('');
   const [oldbody,setOldbody] = useState('');
   var { notenum } = useParams('');
+  useEffect(() => {
+    // storing input name
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
   const addNote = () => {
     if(!toggleEdit){
     const newnote = {
