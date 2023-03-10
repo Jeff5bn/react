@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactQuill from 'react-quill';
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { redirect } from "react-router-dom";
 function App() {
   const [notes, setnotes] = useState(() => {
     const saved = localStorage.getItem("notes");
@@ -177,6 +178,9 @@ const formatDate = (when) => {
   return (
     <BrowserRouter>
     <Routes>
+    <Route  path="/" element={<Content notes={notes} addNote={addNote} sidebarvis={sidebarvis} deleteNote={deleteNote} 
+      selectedNote={selectedNote} setSelectedNote={setSelectedNote} getSelectedNote={getSelectedNote} editNote={editNote} 
+      toggleEdit={toggleEdit} newdate={newdate} newtitle={newtitle} newbody={newbody} value={value} setValue={setValue} oldbody={oldbody} toggleSidebar={toggleSidebar}/>}></Route>
 
       <Route  path="notes" element={<Content notes={notes} addNote={addNote} sidebarvis={sidebarvis} deleteNote={deleteNote} 
       selectedNote={selectedNote} setSelectedNote={setSelectedNote} getSelectedNote={getSelectedNote} editNote={editNote} 
